@@ -1,0 +1,8 @@
+server:
+  port: 8981
+spring:
+  application:
+    name: API-CATEGORY
+  cloud:
+    nacos:
+      server-addr: 192.168.153.135:8848
