@@ -85,6 +85,13 @@
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
             </dependency>
+
+            <!--    引入并维护redis版本-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring.data.redis.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
