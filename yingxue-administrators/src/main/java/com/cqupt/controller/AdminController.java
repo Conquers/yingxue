@@ -48,6 +48,12 @@ public class AdminController {
         return result;
     }
 
+    @DeleteMapping("/tokens/{token}")
+    public void logout(@PathVariable("token") String token) {
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.delete(token);
+    }
+
     /**
      * 已登录用户信息接口
      */
