@@ -83,7 +83,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>${druid.vcerion}</version>
+                <version>${druid.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
