@@ -1,7 +1,9 @@
 package com.cqupt.controller;
 
+import com.cqupt.dto.AdminDto;
 import com.cqupt.entity.Admin;
 import com.cqupt.service.AdminService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -31,7 +33,7 @@ public class AdminController {
     }
 
     /**
-     * 用户登录
+     * 管理员登录
      */
     @PostMapping("/tokens")
     public Map<String, String> tokens(@RequestBody Admin admin, HttpSession session) {
@@ -44,5 +46,22 @@ public class AdminController {
         redisTemplate.opsForValue().set(token, adminDB, 30, TimeUnit.MINUTES);
         result.put("token", token);
         return result;
+    }
+
+    /**
+     * 已登录用户信息接口
+     */
+    @GetMapping("/admin-user")
+    public AdminDto adminDto(String token){
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        Admin admin = (Admin) redisTemplate.opsForValue().get(token);
+        AdminDto adminDto = new AdminDto();
+        /*
+        简化代码，用下面的BeanUtils.copyProperties
+        adminDto.setUsername(admin.getUsername());
+        adminDto.setAvatar(admin.getAvatar());
+        */
+        BeanUtils.copyProperties(admin,adminDto);
+        return adminDto;
     }
 }

@@ -79,6 +79,7 @@
             </if>
         </where>
     </select>
+
     <!--根据用户名查用户-->
     <select id="findByUserName" parameterType="String" resultType="com.cqupt.entity.Admin">
         select

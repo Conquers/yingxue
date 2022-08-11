@@ -24,6 +24,8 @@ mybatis:
   #别名
   type-aliases-package: com.cqupt.entity
 
+  configuration:
+    map-underscore-to-camel-case: true
 # 日志
 logging:
   level:
