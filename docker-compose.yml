@@ -5,6 +5,7 @@ networks:
 
 volumes:
   data:
+  redisdata:
 
 services:
   nacos:
@@ -30,3 +31,9 @@ services:
     environment:
       - "MYSQL_ROOT_PASSWORD=root"
       - "MYSQL_DATABASE=yingxue"
+  redis:
+    image: redis:5.0.10
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
