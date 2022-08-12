@@ -29,5 +29,34 @@ public class CategoryController {
     public List<Category> categories() {
         return categoryService.queryByFirstLevel();
     }
+
+    /**
+     * 添加类别接口
+     */
+    @PostMapping()
+    public Category save(@RequestBody Category category) {
+        return categoryService.insert(category);
+    }
+
+    /**
+     * 更新列表接口
+     */
+    @PatchMapping("/{id}")
+    public Category update(@PathVariable("id") Integer id, @RequestBody Category category) {
+        category.setId(id);
+        return categoryService.update(category);
+    }
+
+    /**
+     * 删除类别接口
+     */
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") Integer id) {
+        if (categoryService.deleteById(id)) {
+            return "删除成功";
+        } else {
+            return "删除失败";
+        }
+    }
 }
 

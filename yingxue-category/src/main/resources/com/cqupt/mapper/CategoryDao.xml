@@ -99,8 +99,11 @@
         WHERE c1.parent_id IS NULL
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+    <!--新增所有列
+    useGeneratedKeys - > 只针对mysql，使用数据库的自增id
+    keyProperty      - > 将数据库本次生成id赋值给参数对象的哪个属性
+    -->
+    <insert id="insert" parameterType="com.cqupt.entity.Category" keyProperty="id" useGeneratedKeys="true">
         insert into category(name, parent_id, created_at, updated_at, deleted_at)
         values (#{name}, #{parentId}, #{createdAt}, #{updatedAt}, #{deletedAt})
     </insert>
@@ -155,6 +158,7 @@
         delete
         from category
         where id = #{id}
+        and parent_id != null
     </delete>
 
 </mapper>

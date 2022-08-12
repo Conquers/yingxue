@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +42,8 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public Category insert(Category category) {
+        category.setCreatedAt(new Date());
+        category.setUpdatedAt(new Date());
         this.categoryDao.insert(category);
         return category;
     }
@@ -53,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public Category update(Category category) {
-        this.categoryDao.update(category);
+        categoryDao.update(category);
         return this.queryById(category.getId());
     }
 
