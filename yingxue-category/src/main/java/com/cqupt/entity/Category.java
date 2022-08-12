@@ -1,6 +1,7 @@
 package com.cqupt.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class Category implements Serializable {
     /**
      * 父级分类id
      */
+    @JsonProperty("parent_id")
     private Integer parentId;
     
     private Date createdAt;
@@ -38,5 +40,6 @@ public class Category implements Serializable {
     
     private Date deletedAt;
 
+    private List<Category> children;
 }
 

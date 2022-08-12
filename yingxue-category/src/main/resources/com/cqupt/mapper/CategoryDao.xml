@@ -11,6 +11,17 @@
         <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap type="com.cqupt.entity.Category" id="CategoriesMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <!--        封装孩子-->
+        <collection property="children" javaType="list" ofType="com.cqupt.entity.Category">
+            <id property="id" column="cid" jdbcType="INTEGER"/>
+            <result property="name" column="cname" jdbcType="VARCHAR"/>
+            <result property="parentId" column="cparent_id" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
     <!--查询单个-->
     <select id="queryById" resultMap="CategoryMap">
         select id,
@@ -76,10 +87,16 @@
             </if>
         </where>
     </select>
-    <select id="queryByFirstLevel" resultType="com.cqupt.entity.Category">
-        select id, name, parent_id, created_at, updated_at, deleted_at
-        from category
-        where parent_id is null
+
+    <select id="queryByFirstLevel" resultMap="CategoriesMap">
+        SELECT c1.id,
+               c1.NAME,
+               c2.id        as cid,
+               c2.name      as cname,
+               c2.parent_id as cparent_id
+        FROM category c1
+                 LEFT JOIN category c2 ON c2.parent_id = c1.id
+        WHERE c1.parent_id IS NULL
     </select>
 
     <!--新增所有列-->
