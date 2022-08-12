@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2022-08-11 20:14:20
  */
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public class CategoryController {
 
     private CategoryService categoryService;
