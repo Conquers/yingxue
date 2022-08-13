@@ -17,8 +17,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!--    commons-->
         <dependency>
-    <!--    commons-->
             <groupId>com.cqupt</groupId>
             <artifactId>yingxue-commons</artifactId>
             <version>1.0-SNAPSHOT</version>

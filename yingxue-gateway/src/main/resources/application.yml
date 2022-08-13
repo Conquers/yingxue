@@ -28,7 +28,7 @@ spring:
         - id: users_router
           uri: lb://API-USERS #负载均衡写法
           predicates:
-            - Path=/users/demos
+            - Path=/admins/users/**
           filters:
             - StripPrefix=1 #去掉请求前缀的filter =写int类型 1代表去掉1级前缀 2代表去掉两级
 
