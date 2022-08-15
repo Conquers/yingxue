@@ -36,6 +36,6 @@ spring:
         - id: videos_router
           uri: lb://API-VIDEOS #负载均衡写法
           predicates:
-            - Path=/videos/demos
+            - Path=/admins/videos/**
           filters:
             - StripPrefix=1 #去掉请求前缀的filter =写int类型 1代表去掉1级前缀 2代表去掉两级
