@@ -1,5 +1,6 @@
 package com.cqupt.controller;
 
+import com.cqupt.constants.RedisPrefix;
 import com.cqupt.dto.AdminDto;
 import com.cqupt.entity.Admin;
 import com.cqupt.service.AdminService;
@@ -42,32 +43,32 @@ public class AdminController {
         Admin adminDB = adminService.login(admin);
         // 登录成功,获取token
         String token = session.getId();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.opsForValue().set(token, adminDB, 30, TimeUnit.MINUTES);
+//        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.opsForValue().set(RedisPrefix.TOKEN_KEY + token, adminDB, 30, TimeUnit.MINUTES);
         result.put("token", token);
         return result;
     }
 
     @DeleteMapping("/tokens/{token}")
     public void logout(@PathVariable("token") String token) {
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.delete(token);
+//        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.delete(RedisPrefix.TOKEN_KEY + token);
     }
 
     /**
      * 已登录用户信息接口
      */
     @GetMapping("/admin-user")
-    public AdminDto adminDto(String token){
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        Admin admin = (Admin) redisTemplate.opsForValue().get(token);
+    public AdminDto adminDto(String token) {
+//        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        Admin admin = (Admin) redisTemplate.opsForValue().get(RedisPrefix.TOKEN_KEY + token);
         AdminDto adminDto = new AdminDto();
         /*
         简化代码，用下面的BeanUtils.copyProperties
         adminDto.setUsername(admin.getUsername());
         adminDto.setAvatar(admin.getAvatar());
         */
-        BeanUtils.copyProperties(admin,adminDto);
+        BeanUtils.copyProperties(admin, adminDto);
         return adminDto;
     }
 }
