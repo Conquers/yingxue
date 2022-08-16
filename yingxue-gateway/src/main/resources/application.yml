@@ -15,6 +15,7 @@ spring:
             - Path=/admins/tokens/**,/admins/admin-user #采用这种路径断言办法，请求进入网关断言，但是不能已这种方式发送给controller，因为没有此路径的请求
           filters:
             - StripPrefix=1 #去掉请求前缀的filter =写int类型 1代表去掉1级前缀 2代表去掉两级
+            - Token
 
         #category router
         - id: category_router
@@ -23,6 +24,7 @@ spring:
             - Path=/admins/categories/**
           filters:
             - StripPrefix=1 #去掉请求前缀的filter =写int类型 1代表去掉1级前缀 2代表去掉两级
+            - Token=true
 
         #users router
         - id: users_router
@@ -31,6 +33,7 @@ spring:
             - Path=/admins/users/**
           filters:
             - StripPrefix=1 #去掉请求前缀的filter =写int类型 1代表去掉1级前缀 2代表去掉两级
+            - Token=true
 
         #videos router
         - id: videos_router
@@ -39,3 +42,8 @@ spring:
             - Path=/admins/videos/**
           filters:
             - StripPrefix=1 #去掉请求前缀的filter =写int类型 1代表去掉1级前缀 2代表去掉两级
+            - Token=true
+
+  redis:
+    host: 192.168.153.135
+    port: 6379
