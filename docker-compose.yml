@@ -49,6 +49,17 @@ services:
       - redis
       - nacos
 
+  admins1:
+    build:
+      context: ./images/admins
+      dockerfile: Dockerfile
+    ports:
+      - "9980:8980"
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+
   category:
     build:
       context: ./images/category
