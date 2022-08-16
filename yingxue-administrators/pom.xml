@@ -18,7 +18,7 @@
     </properties>
 
     <dependencies>
-    <!--    commons-->
+        <!--    commons-->
         <dependency>
             <groupId>com.cqupt</groupId>
             <artifactId>yingxue-commons</artifactId>
@@ -42,4 +42,17 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <!--        引入部署插件-->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.cqupt.AdminAdminsApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

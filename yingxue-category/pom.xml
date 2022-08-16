@@ -39,4 +39,17 @@
             <artifactId>druid</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <!--        引入部署插件-->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.cqupt.AdminCategoryApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -37,3 +37,65 @@ services:
       - "6379:6379"
     volumes:
       - redisdata:/data
+
+  admins:
+    build:
+      context: ./images/admins
+      dockerfile: Dockerfile
+    ports:
+      - "8980:8980"
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+
+  category:
+    build:
+      context: ./images/category
+      dockerfile: Dockerfile
+    ports:
+      - "8981:8981"
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+
+  gateway:
+    build:
+      context: ./images/gateway
+      dockerfile: Dockerfile
+    ports:
+      - "9999:9999"
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+
+  users:
+    build:
+      context: ./images/users
+      dockerfile: Dockerfile
+    ports:
+      - "8982:8982"
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+
+  videos:
+    build:
+      context: ./images/videos
+      dockerfile: Dockerfile
+    ports:
+      - "8983:8983"
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+
+  nginx:
+    image: nginx:1.21.1
+    ports:
+      - "80:80"
+    volumes:
+      - ./admin-dist:/usr/share/nginx/html:ro
