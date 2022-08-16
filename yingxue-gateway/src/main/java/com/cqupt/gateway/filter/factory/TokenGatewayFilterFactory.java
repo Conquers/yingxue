@@ -1,7 +1,7 @@
 package com.cqupt.gateway.filter.factory;
 
-import com.cqupt.config.RedisTemplateConfig;
 import com.cqupt.constants.RedisPrefix;
+import com.cqupt.exceptions.IllegalTokenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -46,14 +46,14 @@ public class TokenGatewayFilterFactory extends AbstractGatewayFilterFactory<Toke
                 if(config.requiredToken) {
                     MultiValueMap<String, String> queryParams = exchange.getRequest().getQueryParams();
                     if (queryParams.get("token") == null) {
-                        throw new RuntimeException("未知token");
+                        throw new IllegalTokenException("未知token");
                     }
                     //1.获取token信息
                     String token = queryParams.get("token").get(0);
                     System.out.println(token);
                     //2.根据token信息去redis获取
                     if (!redisTemplate.hasKey(RedisPrefix.TOKEN_KEY + token)) {
-                        throw new RuntimeException("不合法的token");
+                        throw new IllegalTokenException("不合法的token");
                     }
                 }
                 return chain.filter(exchange);
